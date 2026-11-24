@@ -38,3 +38,16 @@ export function useSeries(symbols: string[], window: TimeWindow) {
     placeholderData: keepPreviousData,
   });
 }
+
+/** Series for the single user-selected symbol. No request is made until a symbol is chosen. */
+export function useCustomSeries(symbol: string | null, window: TimeWindow) {
+  const provider = useProvider();
+  return useQuery({
+    queryKey: ['custom-series', window, symbol],
+    queryFn: ({ signal }) => provider.getSeries([symbol as string], window, signal),
+    enabled: symbol !== null,
+    staleTime: SERIES_STALE_MS[window],
+    retry: false,
+  });
+}
+

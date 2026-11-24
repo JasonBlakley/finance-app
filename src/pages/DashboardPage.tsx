@@ -10,6 +10,7 @@ import { ChartCard } from '../components/charts/ChartCard';
 import { RankingTable } from '../components/charts/RankingTable';
 import { PartialDataBanner } from '../components/feedback/PartialDataBanner';
 import { TimeWindowTabs } from '../components/layout/TimeWindowTabs';
+import { CustomCompanySection } from './CustomCompanySection';
 
 // Carbon Charts and d3 are large; load them after the first paint.
 const LineChartPanel = lazy(() =>
@@ -100,6 +101,8 @@ export function DashboardPage() {
       {window !== 'DAY' && ranking.length > 0 ? (
         <RankingTable rows={ranking} label={companyName} caption={`${label}: ranking by return`} />
       ) : null}
+
+      <CustomCompanySection window={window} />
     </main>
   );
 }
