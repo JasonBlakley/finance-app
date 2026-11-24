@@ -1,6 +1,6 @@
-# Maintainer handle on github.ibm.com.
+# Maintainer handle on github.com.
 # Pair this with a branch protection rule that requires review from code owners on main.
 
-/server/            @Jason-Blakley
-/.github/           @Jason-Blakley
-/src/services/      @Jason-Blakley
+/server/            @JasonBlakley
+/.github/           @JasonBlakley
+/src/services/      @JasonBlakley

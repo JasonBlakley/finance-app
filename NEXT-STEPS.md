@@ -4,10 +4,12 @@ Saved 2026-11-24. Pick up here when you return to the finance app.
 
 ## Current state
 
-- `finance-app/` lives at the workspace root, **outside** the `bobl3` git repo. It is not a git repo yet.
+- `finance-app/` lives at the workspace root, **outside** the `bobl3` git repo. It has its own git repo (branch `main`).
+- Remotes: `origin` = https://github.com/JasonBlakley/finance-app (used for the Stand & Deliver demo); `ibm-backup` = https://github.ibm.com/Jason-Blakley/finance-app (backup only).
+- GitHub Actions is **disabled by enterprise admins** on github.ibm.com, so CI cannot run there. That is why the demo repo is on github.com.
 - `npm run validate` passes: lint (zero warnings), typecheck, 86 tests in 11 files, production build.
-- The proxy was smoke-tested against live Yahoo Finance (IBM, MSFT, SAP) and in mock mode.
-- The UI has **not** been checked in a browser, and the Carbon chart is mocked in tests, so it has never been rendered.
+- The proxy was smoke-tested against live Yahoo Finance and the UI was checked in a browser (all three tabs, chart, error panel and Retry).
+- The Bob GitHub MCP tools (`github`, `github-ibm`) return "Bad credentials". Fix their tokens before asking Bob to create issues or PRs.
 
 ## To do
 
@@ -20,17 +22,10 @@ Saved 2026-11-24. Pick up here when you return to the finance app.
 - [ ] Offline option: `$env:VITE_DATA_SOURCE="mock"; npm run dev` (PowerShell)
 
 ### 2. Set up GitHub
-- [x] Replace `@your-github-username` in `.github/CODEOWNERS` (now `@Jason-Blakley`)
-- [ ] Create a new `finance-app` repository on GitHub Enterprise (https://github.ibm.com/Jason-Blakley). Do not initialize it with a README, .gitignore or license
-- [ ] From `finance-app/`:
-  ```bash
-  git init
-  git add .
-  git commit -m "feat: initial finance dashboard"
-  git branch -M main
-  git remote add origin https://github.ibm.com/Jason-Blakley/finance-app.git
-  git push -u origin main
-  ```
+- [x] Replace `@your-github-username` in `.github/CODEOWNERS` (now `@JasonBlakley`)
+- [x] Create the repository on github.ibm.com and push (backup, remote `ibm-backup`)
+- [x] Create the repository on github.com (https://github.com/JasonBlakley/finance-app)
+- [ ] Commit the CODEOWNERS/NEXT-STEPS changes, then `git push -u origin main`. Needs a github.com token with `repo` + `workflow` scopes, stored in Git Credential Manager (never in a file or URL)
 - [ ] Confirm the **Finance App CI** workflow runs and passes in the Actions tab
 - [ ] Enable Issues and Pull Requests, and add branch protection on `main`: require the `validate` check and one review
 - [ ] Create the branch for Part 2: `git checkout -b feature/user-selected-company-chart`
