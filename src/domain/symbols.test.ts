@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_SYMBOLS, SymbolValidationError, isValidSymbol, parseSymbols } from './symbols';
+import { MAX_SYMBOLS, SymbolValidationError, isValidSymbol, parseSymbols, validateSymbolInput } from './symbols';
 import { WINDOWS, TIME_WINDOWS, isTimeWindow } from './windows';
 
 describe('isValidSymbol', () => {
@@ -39,5 +39,20 @@ describe('windows', () => {
     expect(isTimeWindow('YEAR')).toBe(false);
     expect(isTimeWindow('toString')).toBe(false);
     expect(isTimeWindow(undefined)).toBe(false);
+  });
+});
+
+describe('validateSymbolInput', () => {
+  it('accepts and normalises a valid symbol', () => {
+    expect(validateSymbolInput('  aapl ')).toEqual({ ok: true, symbol: 'AAPL' });
+  });
+  it.each(['', '   ', '!!', 'WAYTOOLONGSYMBOL1', 'A B'])('rejects %j', (raw) => {
+    expect(validateSymbolInput(raw).ok).toBe(false);
+  });
+  it('rejects a symbol already on the dashboard', () => {
+    expect(validateSymbolInput('ibm', ['IBM', 'MSFT'])).toEqual({
+      ok: false,
+      message: 'IBM is already shown on the dashboard.',
+    });
   });
 });

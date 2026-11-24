@@ -105,3 +105,23 @@ body {
   background: var(--cds-layer-01, #f4f4f4);
   padding: 1rem;
 }
+
+.custom-company {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.symbol-form {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  .cds--text-input__field-wrapper {
+    min-width: 16rem;
+  }
+
+  button {
+    margin-top: 1.5rem;
+  }
+}

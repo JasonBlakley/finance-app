@@ -7,6 +7,25 @@ export function isValidSymbol(value: string): boolean {
   return SYMBOL_PATTERN.test(value);
 }
 
+export type SymbolInputResult = { ok: true; symbol: string } | { ok: false; message: string };
+
+/**
+ * Validate a single user-typed ticker before any request is made.
+ * Trims and upper-cases, then rejects empty, malformed, over-long or already-shown symbols.
+ */
+export function validateSymbolInput(raw: string, alreadyShown: string[] = []): SymbolInputResult {
+  const symbol = raw.trim().toUpperCase();
+  if (!symbol) return { ok: false, message: 'Enter a ticker symbol.' };
+  if (symbol.length > 12) return { ok: false, message: 'A ticker symbol has at most 12 characters.' };
+  if (!isValidSymbol(symbol)) {
+    return { ok: false, message: 'Use letters, numbers and . - ^ = only, for example AAPL.' };
+  }
+  if (alreadyShown.includes(symbol)) {
+    return { ok: false, message: `${symbol} is already shown on the dashboard.` };
+  }
+  return { ok: true, symbol };
+}
+
 export class SymbolValidationError extends Error {
   constructor(message: string) {
     super(message);
