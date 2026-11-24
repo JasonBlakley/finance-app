@@ -1,0 +1,48 @@
+name: Feature request
+description: Request a new capability for the finance dashboard
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: business-request
+    attributes:
+      label: Business request
+      description: What do users need, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behaviour
+      description: One bullet per observable behaviour.
+      placeholder: |
+        - the user can enter or select a ticker symbol
+        - a new graph appears for the selected company
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Testable statements. These become the test cases and the PR checklist.
+      placeholder: |
+        - [ ] invalid symbols show a clear message
+        - [ ] existing dashboards remain intact
+    validations:
+      required: true
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: Likely areas affected
+      options:
+        - label: src/domain (pure logic)
+        - label: src/services (data providers)
+        - label: server/ (Yahoo proxy)
+        - label: src/state
+        - label: src/components or src/pages
+  - type: textarea
+    id: out-of-scope
+    attributes:
+      label: Out of scope
+    validations:
+      required: false

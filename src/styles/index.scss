@@ -1,0 +1,107 @@
+// Carbon's default font path uses webpack's "~" prefix, which Vite does not resolve.
+@use '@carbon/react' with (
+  $font-path: '../../node_modules/@ibm/plex'
+);
+
+body {
+  margin: 0;
+  background: var(--cds-background, #ffffff);
+  color: var(--cds-text-primary, #161616);
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  h1 {
+    margin: 0;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    p {
+      margin: 0;
+      color: var(--cds-text-secondary, #525252);
+    }
+  }
+}
+
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.quote-card {
+  &--highlight {
+    border-top: 4px solid #0f62fe;
+  }
+
+  &__symbol {
+    margin: 0 0 0.5rem;
+    font-weight: 600;
+  }
+
+  &__name {
+    font-weight: 400;
+    color: var(--cds-text-secondary, #525252);
+  }
+
+  &__price {
+    margin: 0;
+    font-size: 1.75rem;
+  }
+
+  &__change,
+  &__error {
+    margin: 0.25rem 0 0;
+  }
+}
+
+.is-up {
+  color: #198038;
+}
+
+.is-down {
+  color: #da1e28;
+}
+
+.chart-card {
+  background: var(--cds-layer-01, #f4f4f4);
+  padding: 1rem;
+
+  &__title {
+    margin: 0 0 0.25rem;
+    font-size: 1.25rem;
+  }
+
+  &__subtitle,
+  &__empty {
+    margin: 0 0 1rem;
+    color: var(--cds-text-secondary, #525252);
+  }
+
+  &__skeleton {
+    width: 100%;
+    height: 360px;
+  }
+}
+
+.error-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ranking {
+  background: var(--cds-layer-01, #f4f4f4);
+  padding: 1rem;
+}
